@@ -28,25 +28,26 @@ class Song(db.Model):
     title = db.Column(db.String(255), nullable = False)
     artist = db.Column(db.String(255), nullable = False)
     album = db.Column(db.String(255), nullable = False)
-    release_date = db.Column(db.String(255), nullable = False)
+    release_date = db.Column(db.Date, nullable = False)
     genre = db.Column(db.String(255))
 
     def __repr__(self):
         return f'{self.genre} {self.release_date} {self.album} {self.artist} {self.title}'
 
 # Schemas
-class SongSchema(ma.Schema):
+class create_song(ma.Schema):
     class Meta:
         fields = ('id', 'title', 'artist', 'album', 'release_date', 'genre')
 
-song_schema = SongSchema()
-songs_schema = SongSchema(many=True)
-
-
-
+song_schema = create_song()
+songs_schema = create_song(many = True)
 
 # Resources
-
+class SongListResource(Resource):
+    def get(self):
+        all_songs = Song.query.all()
+        return songs_schema.dump(all_songs)
 
 
 # Routes
+api.add_resource(SongListResource, '/api/songs')

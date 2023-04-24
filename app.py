@@ -64,6 +64,12 @@ class SongResource(Resource):
     def get(self, pk):
         song_from_db = Song.query.get_or_404(pk)
         return song_schema.dump(song_from_db)
+    
+    def delete(self, pk):
+        song_from_db = Song.query.get_or_404(pk)
+        db.session.delete(song_from_db)
+        db.session.commit()
+        return '', 204
 
 # Routes
 api.add_resource(SongListResource, '/api/songs')

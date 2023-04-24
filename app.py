@@ -70,6 +70,23 @@ class SongResource(Resource):
         db.session.delete(song_from_db)
         db.session.commit()
         return '', 204
+    
+    def put(self, pk):
+        song_from_db = Song.query.get_or_404(pk)
+
+        if 'title' in request.json:
+            song_from_db.title = request.json['title']
+        if 'artist' in request.json:
+            song_from_db.artist = request.json['artist']
+        if 'album' in request.json:
+            song_from_db.album = request.json['album']
+        if 'release_date' in request.json:
+            song_from_db.release_date = request.json['release_date']
+        if 'genre' in request.json:
+            song_from_db.genre = request.json['genre']
+
+        db.session.commit()
+        return song_schema.dump(song_from_db)
 
 # Routes
 api.add_resource(SongListResource, '/api/songs')

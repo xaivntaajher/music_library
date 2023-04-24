@@ -59,6 +59,12 @@ class SongListResource(Resource):
         db.session.add(new_song)
         db.session.commit()
         return song_schema.dump(new_song), 201
+    
+class SongResource(Resource):
+    def get(self, pk):
+        song_from_db = Song.query.get_or_404(pk)
+        return song_schema.dump(song_from_db)
 
 # Routes
 api.add_resource(SongListResource, '/api/songs')
+api.add_resource(SongResource, '/api/songs/<int:pk>')

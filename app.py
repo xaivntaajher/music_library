@@ -48,6 +48,17 @@ class SongListResource(Resource):
         all_songs = Song.query.all()
         return songs_schema.dump(all_songs)
 
+    def post(self):
+        new_song = Song(
+            title = request.json['title'],
+            artist = request.json['artist'],
+            album = request.json['album'],
+            release_date = request.json['release_date'],
+            genre = request.json['genre']
+        )
+        db.session.add(new_song)
+        db.session.commit()
+        return song_schema.dump(new_song), 201
 
 # Routes
 api.add_resource(SongListResource, '/api/songs')

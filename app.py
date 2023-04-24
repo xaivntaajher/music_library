@@ -35,6 +35,13 @@ class Song(db.Model):
         return f'{self.genre} {self.release_date} {self.album} {self.artist} {self.title}'
 
 # Schemas
+class SongSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'title', 'artist', 'album', 'release_date', 'genre')
+
+song_schema = SongSchema()
+songs_schema = SongSchema(many=True)
+
 
 
 

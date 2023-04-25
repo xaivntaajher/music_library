@@ -103,7 +103,7 @@ class SongResource(Resource):
     def patch(self, pk):
         song_from_db = Song.query.get_or_404(pk)
         if song_from_db.likes is None:
-            song_from_db.likes = 0
+            song_from_db.likes = 1
         else:
             song_from_db.likes += 1
         db.session.commit()

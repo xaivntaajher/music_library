@@ -111,6 +111,40 @@
 			"response": []
 		},
 		{
+			"name": "Patch Likes for Song by ID",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"release_date\": \"2002-03-02\",\r\n        \"genre\": \"Nursery\",\r\n        \"album\": \"Rocking with Old People\",\r\n        \"title\": \"Coding\",\r\n        \"artist\": \"Parents\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/songs/8/likes",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"songs",
+						"8",
+						"likes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Update Song",
 			"request": {
 				"method": "PUT",

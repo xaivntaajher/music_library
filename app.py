@@ -31,6 +31,7 @@ class Song(db.Model):
     album = db.Column(db.String(255), nullable = False)
     release_date = db.Column(db.Date, nullable = False)
     genre = db.Column(db.String(255))
+    running_time = db.Column(db.Integer)
     likes = db.Column(db.Integer, default = 0)
 
     def __repr__(self):
@@ -44,10 +45,11 @@ class create_song(ma.Schema):
     album = fields.String(required = True)
     release_date = fields.Date(required = True)
     genre = fields.String()
+    running_time = fields.Integer()
     likes = fields.Integer()
 
     class Meta:
-        fields = ('id', 'title', 'artist', 'album', 'release_date', 'genre', 'likes')
+        fields = ('id', 'title', 'artist', 'album', 'release_date', 'genre', 'running_time', 'likes')
 
     @post_load
     def create_song(self, data, **kwargs):
@@ -60,7 +62,10 @@ songs_schema = create_song(many = True)
 class SongListResource(Resource):
     def get(self):
         all_songs = Song.query.all()
-        return songs_schema.dump(all_songs)
+        total = 0
+        for song in all_songs:
+            total += song.running_time
+        return {'songs': songs_schema.dump(all_songs), 'total_running_time': f'{int(total/60)}:{total%60}'}
 
     def post(self):
         form_data = request.get_json()
@@ -96,6 +101,8 @@ class SongResource(Resource):
             song_from_db.release_date = request.json['release_date']
         if 'genre' in request.json:
             song_from_db.genre = request.json['genre']
+        if 'running_time' in request.json:
+            song_from_db.running_time = request.json['running_time']
 
         db.session.commit()
         return song_schema.dump(song_from_db)

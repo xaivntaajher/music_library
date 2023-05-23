@@ -1,18 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import './MusicTable.css'
 
 const MusicTable = ({ searchInput, parentSongs }) => {
-  const [songs, setSongs] = useState([]);
-
-  useEffect(() => {
-    async function getSongs() {
-      const response = await axios.get("http://127.0.0.1:5000/api/songs");
-      setSongs(response.data.songs);
-    }
-
-    getSongs();
-  }, []);
 
   let songFilter = parentSongs.filter((song) => {
     const lowerSearchInput = searchInput ? searchInput.toLowerCase() : "";
@@ -51,18 +40,16 @@ const MusicTable = ({ searchInput, parentSongs }) => {
         </tr>
       </thead>
       <tbody>
-        {songFilter.map((song) => {
-          return (
-            <tr key={song.id}>
-              <td>{song.title}</td>
-              <td>{song.artist}</td>
-              <td>{song.album}</td>
-              <td>{song.release_date}</td>
-              <td>{song.genre}</td>
-              <td>{song.running_time}</td>
-            </tr>
-          );
-        })}
+        {songFilter.map((song) => (
+        <tr key={song.id}>
+          <td>{song.title}</td>
+          <td>{song.artist}</td>
+          <td>{song.album}</td>
+          <td>{song.genre}</td>
+          <td>{song.release_date}</td>
+          <td>{song.running_time}</td>
+        </tr>
+      ))}
       </tbody>
     </table>
   );

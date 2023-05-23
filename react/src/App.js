@@ -5,6 +5,7 @@ import './App.css';
 import NavBar from './Components/NavBar/NavBar';
 import MusicTable from './Components/MusicTable/MusicTable';
 import AddSong from './Components/AddSong/AddSong';
+import SearchBar from './Components/SearchBar/SearchBar';
 
 function App() {
   const [songs, setSongs] = useState([]);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import './MusicTable.css'
 
 const MusicTable = ({ searchInput, parentSongs }) => {
   const [songs, setSongs] = useState([]);
@@ -38,7 +39,7 @@ const MusicTable = ({ searchInput, parentSongs }) => {
   });
 
   return (
-    <table>
+    <table className="table">
       <thead>
         <tr>
           <th>Title</th>

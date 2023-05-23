@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBar from 'C:/Users/dn_he/Desktop/devCodeCamp/music_library_api/react/src/Components/SearchBar/SearchBar.jsx';
+import SearchBar from "../SearchBar/SearchBar";
 import './NavBar.css'
 
 const NavBar = (props) => {

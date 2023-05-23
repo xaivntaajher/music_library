@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import './App.css';
 import NavBar from './Components/NavBar/NavBar';
-import SearchBar from './Components/SearchBar/SearchBar';
 import MusicTable from './Components/MusicTable/MusicTable';
 import AddSong from './Components/AddSong/AddSong';
 
@@ -18,22 +17,20 @@ function App() {
 
   }
 
-  useEffect(() => {
-    async function searchSongs() {
-      const response = await axios.get('http://127.0.0.1:5000/api/songs');
-      setSongs(response.data.songs);
-    }
-
-    searchSongs();
-  }, []);
-
+    async function getSongs() {
+    const response = await axios.get('http://127.0.0.1:5000/api/songs');
+    setSongs(response.data.songs);
+  }
   
+  
+  useEffect(() => {
+    getSongs();
+  }, []);
 
   return (
     <div>
       <div>
         <div><NavBar /></div>
-        <div><SearchBar /></div>
       </div>
       <div><AddSong addNewSongProperty={addNewSong} /></div>
       <div><MusicTable parentSongs={songs} /></div>

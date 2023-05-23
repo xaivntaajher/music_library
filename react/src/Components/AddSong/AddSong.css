@@ -1,0 +1,27 @@
+.label {
+    padding-left: 20px;
+}
+
+.input {
+    margin: 10px;
+    padding-right: 200px;
+}
+
+.align {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.button {
+    display: flex;
+    margin: 10px;
+    align-items: flex-end;
+}

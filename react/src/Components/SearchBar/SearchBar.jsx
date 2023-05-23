@@ -1,42 +1,22 @@
 import React, { useState } from 'react';
 
-const SearchBar = (props) => {
-    
-    const [search, setSearch] = useState('')
+const SearchBar = ({ handleSearch }) => {
+  const [searchTerm, setSearchTerm] = useState('');
 
-    function handleSubmit(event){
-        event.preventDefault();
-      
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-        if (!search){
-            return;
-        }
+    handleSearch(searchTerm);
 
-        let newSearch = {
-            search: search,
-        }
+    setSearchTerm('');
+  };
 
-        props.addNewSearchProperty(newSearch)
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" placeholder="Search..." value={searchTerm}onChange={(event) => setSearchTerm(event.target.value)}/>
+      <button type="submit">Search</button>
+    </form>
+  );
+};
 
-        setSearch('')
-    }
-    
-       
-    return ( 
-        <form onSubmit={handleSubmit}>
-            <div>
-                <div>
-                    <select type="text"></select>
-                    <input type="text" value={search} onChange={(event) => setSearch(event.target.value)}></input>
-                </div>
-            </div>
-            <div>
-                <div>
-                    <button type="submit">Search</button>
-                </div>
-            </div>
-        </form>
-     );
-}
- 
 export default SearchBar;

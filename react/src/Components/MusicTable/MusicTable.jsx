@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const MusicTable = ({ searchInput, parentSongs }) => {
   const [songs, setSongs] = useState([]);
 
   useEffect(() => {
     async function getSongs() {
-      const response = await axios.get('http://127.0.0.1:5000/api/songs');
+      const response = await axios.get("http://127.0.0.1:5000/api/songs");
       setSongs(response.data.songs);
     }
 
@@ -14,26 +14,26 @@ const MusicTable = ({ searchInput, parentSongs }) => {
   }, []);
 
   let songFilter = parentSongs.filter((song) => {
-    const lowerSearchInput = searchInput ? searchInput.toLowerCase() : '';
-    const lowerTitle = song.title ? song.title.toLowerCase() : '';
-    const lowerAlbum = song.album ? song.album.toLowerCase() : '';
-    const lowerArtist = song.artist ? song.artist.toLowerCase() : '';
-    const lowerGenre = song.genre ? song.genre.toLowerCase() : '';
-  
+    const lowerSearchInput = searchInput ? searchInput.toLowerCase() : "";
+    const lowerTitle = song.title ? song.title.toLowerCase() : "";
+    const lowerAlbum = song.album ? song.album.toLowerCase() : "";
+    const lowerArtist = song.artist ? song.artist.toLowerCase() : "";
+    const lowerGenre = song.genre ? song.genre.toLowerCase() : "";
+
     let songMatch = false;
-  
+
     if (lowerTitle.includes(lowerSearchInput)) {
       songMatch = true;
     } else if (lowerAlbum.includes(lowerSearchInput)) {
-        songMatch = true;
+      songMatch = true;
     } else if (lowerArtist.includes(lowerSearchInput)) {
-        songMatch = true;
+      songMatch = true;
     } else if (song.release_date && song.release_date.includes(searchInput)) {
-        songMatch = true;
+      songMatch = true;
     } else if (lowerGenre.includes(lowerSearchInput)) {
-        songMatch = true;
+      songMatch = true;
     }
-  
+
     return songMatch;
   });
 
@@ -68,4 +68,3 @@ const MusicTable = ({ searchInput, parentSongs }) => {
 };
 
 export default MusicTable;
-

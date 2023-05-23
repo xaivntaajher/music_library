@@ -1,0 +1,11 @@
+.display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(190, 243, 225);
+    padding-left: 100px;
+}
+
+.searchbar {
+    margin-right: 200px;
+}

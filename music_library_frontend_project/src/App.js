@@ -5,7 +5,7 @@ import './App.css';
 import NavBar from './Components/NavBar/NavBar';
 import MusicTable from './Components/MusicTable/MusicTable';
 import AddSong from './Components/AddSong/AddSong';
-import FilteredSongs from './Components/FilteredSongs/FilteredSongs';
+import SearchBar from './Components/SearchBar/SearchBar';
 
 function App() {
   const [songs, setSongs] = useState([]);
@@ -34,7 +34,8 @@ function App() {
         <div><NavBar /></div>
       </div>
       <div><AddSong addNewSongProperty={addNewSong} /></div>
-      <div><FilteredSongs/></div>
+      <h1 className='h1'>Filter Songs</h1>
+      <div><SearchBar/></div>
       <h1 className='h1'>Song List</h1>
       <div><MusicTable parentSongs={songs} /></div>
     </div>

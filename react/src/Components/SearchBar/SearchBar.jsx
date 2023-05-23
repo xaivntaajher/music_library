@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-
 const SearchBar = (props) => {
     
     const [search, setSearch] = useState('')
 
     function handleSubmit(event){
         event.preventDefault();
+      
 
         if (!search){
             return;
@@ -21,8 +21,7 @@ const SearchBar = (props) => {
         setSearch('')
     }
     
-    
-    
+       
     return ( 
         <form onSubmit={handleSubmit}>
             <div>
